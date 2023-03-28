@@ -17,6 +17,8 @@ app.config['UPLOADED_PHOTOS_DEST'] = 'uploads'
 photos = UploadSet('photos', IMAGES)
 configure_uploads(app, photos)
 
+
+
 class UploadForm(FlaskForm):
     photo = FileField(
         validators=[
@@ -58,3 +60,8 @@ def upload_image():
     
     html = render_template('faceExpressionRecognition.html', form=form, file_url=file_url, entry=entry)
     return html
+
+    if _name_ == "_main_":
+        app.run(host="0.0.0.0", port=8000)
+
+
