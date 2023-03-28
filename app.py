@@ -61,7 +61,7 @@ def upload_image():
     html = render_template('faceExpressionRecognition.html', form=form, file_url=file_url, entry=entry)
     return html
 
-    if _name_ == "_main_":
-        app.run(host="0.0.0.0", port=8000)
 
 
+if __name__ == "_main_":
+    app.run(host="0.0.0.0", port=8000)
