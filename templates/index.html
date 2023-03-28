@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}
+  <br>
+  <h1>Welcome to Face Expression Recognition </h1><br>
+  <h3>{{ utc_dt }}</h3>
+  <img src="{{url_for('static', filename='FER.jpg')}}" align="middle" />
+{% endblock %}
