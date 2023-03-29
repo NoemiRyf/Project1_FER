@@ -55,6 +55,7 @@ def upload_image():
         entry = emotion_detector.detect_emotions(input_image_arr)
         print(entry)
            
+           
     else:
         file_url = None
     
