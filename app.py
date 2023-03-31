@@ -14,7 +14,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'JSFKS'
 app.config['UPLOADED_PHOTOS_DEST'] = 'uploads'
 
-photos = UploadSet('photos', IMAGES)
+photos = UploadSet('photos', IMAGES) 
 configure_uploads(app, photos)
 
 
@@ -55,7 +55,7 @@ def upload_image():
         entry = emotion_detector.detect_emotions(input_image_arr)
         print(entry)
            
-           
+
     else:
         file_url = None
     
