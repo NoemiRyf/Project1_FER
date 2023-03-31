@@ -34,6 +34,10 @@ def welcome():
     html = render_template('index.html')
     return html
 
+
+if __name__ == '__main__':
+    app.run(host="localhost", port=8000, debug=True)
+
 	
 @app.route('/uploads/<filename>')
 def get_file(filename):
@@ -64,5 +68,4 @@ def upload_image():
 
 
 
-if __name__ == "_main_":
-    app.run(host="0.0.0.0", port=8000)
+
