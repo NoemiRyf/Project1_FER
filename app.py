@@ -9,7 +9,7 @@ from werkzeug.utils import secure_filename
 from PIL import Image
 import numpy as np
 
-
+#Test
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'JSFKS'
 app.config['UPLOADED_PHOTOS_DEST'] = 'uploads'
