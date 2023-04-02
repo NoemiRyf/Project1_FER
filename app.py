@@ -28,7 +28,7 @@ class UploadForm(FlaskForm):
         FileAllowed(['jpg', 'png', 'jpeg'], 'Images only!')
     ])
     submit = SubmitField('Detect Emotion')
-
+#test
 
 @app.route('/uploads/<filename>')
 def get_file(filename):
