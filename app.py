@@ -1,3 +1,7 @@
+import os
+
+
+# Your existing Flask code below
 from fer import FER
 from flask import Flask, url_for, render_template, request
 from flask.helpers import send_from_directory
@@ -64,6 +68,5 @@ def upload_image():
 def welcome():
     return render_template('index.html')
 
-
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8000)
