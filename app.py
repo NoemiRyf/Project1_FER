@@ -1,19 +1,13 @@
 import os
-
-
-# Your existing Flask code below
+from PIL import Image
+import numpy as np
 from fer import FER
-from flask import Flask, url_for, render_template, request
-from flask.helpers import send_from_directory
+from flask import Flask, render_template, request, send_from_directory, url_for
 from flask_uploads import UploadSet, IMAGES, configure_uploads
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 from wtforms import SubmitField
 from werkzeug.utils import secure_filename
-from PIL import Image
-import numpy as np
-import os
-
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'JSFKS'
@@ -28,7 +22,6 @@ class UploadForm(FlaskForm):
         FileAllowed(['jpg', 'png', 'jpeg'], 'Images only!')
     ])
     submit = SubmitField('Detect Emotion')
-#test
 
 @app.route('/uploads/<filename>')
 def get_file(filename):
@@ -50,23 +43,26 @@ def upload_image():
         form.photo.data.save(os.path.join(app.config['UPLOADED_PHOTOS_DEST'], filename))
         file_url = url_for('get_file', filename=filename)
 
-
         # Open image using PIL
-        input_image = Image.open(os.path.join(app.config['UPLOADED_PHOTOS_DEST'], filename))
+        try:
+            input_image = Image.open(os.path.join(app.config['UPLOADED_PHOTOS_DEST'], filename))
+        except Exception as e:
+            return render_template('face_expression_recognition.html', form=form, error=str(e))
+
         input_image_arr = np.array(input_image)
 
         emotion_detector = FER()
         # Output image's information
-        entry = emotion_detector.detect_emotions(input_image_arr)
-  
-
+        try:
+            entry = emotion_detector.detect_emotions(input_image_arr)
+        except Exception as e:
+            return render_template('face_expression_recognition.html', form=form, error=str(e))
 
     return render_template('face_expression_recognition.html', form=form, file_url=file_url, entry=entry)
-
 
 @app.route('/')
 def welcome():
     return render_template('index.html')
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000)
+if __name__ == '__main__':
+    app.run(host="localhost", port=8080, debug=True)
